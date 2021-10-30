@@ -1,0 +1,158 @@
+@charset "utf-8";
+
+$purple: #8a4d76;
+$pink: #fa7c91;
+$brown: #757763;
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
+$blue-gray: #161d2e;
+$light-blue-gray: #334155;
+
+// Bulma's global variable overrides
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$primary: $purple;
+$link: $pink;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Bulma's component variable overrides
+$body-background-color: $blue-gray;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+$input-background-color: $light-blue-gray;
+$input-color: white;
+
+// Table
+$background: #efefef;
+$lfs-blue: #1a242c;
+$lfs-yellow: #fab700;
+$lfs-grey: #75787b;
+
+// Import only what you need from Bulma
+
+.ch4 {
+  &__dark-mode-btn {
+    border: 0;
+    padding: 8px;
+    background-color: #fce7f3;
+    color: #ec4899;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
+
+body {
+  background-color: $beige-lighter;
+  color: $blue-gray;
+  padding: 5%;
+}
+
+body.dark-mode {
+  background-color: $blue-gray;
+  color: $beige-light;
+
+  & .nav > li a {
+    color: $blue-gray;
+    background-color: $beige-light;
+    text-decoration: none;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+  }
+  .back-to-home {
+    color: $beige-lighter;
+  }
+}
+
+code {
+  background-color: blanchedalmond;
+  margin: 0.7rem 0.2rem;
+  padding: 0.2rem 0.7rem;
+  color: darkgreen;
+  border-radius: 2px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  justify-content: center;
+  padding: 0 30;
+
+  font-family: sans-serif;
+  text-align: left;
+}
+.nav li:not(:first-child) {
+  padding-left: 1rem;
+}
+.nav li a {
+  color: #fdf2f8;
+  text-decoration: none;
+  background-color: #ec4899;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+}
+
+.nav {
+  margin-bottom: 5%;
+  display: flex;
+  list-style-type: none;
+  padding: 5;
+  justify-content: space-around;
+}
+
+.chart-data {
+  display: flex;
+  margin-top: 6%;
+  justify-content: space-around;
+  align-items: bottom;
+}
+.table-latitude {
+  width: 100%;
+  caption {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $lfs-yellow;
+    text-align: center;
+  }
+  thead {
+    background-color: white;
+    border-top: 2px solid $lfs-yellow;
+    border-bottom: 2px solid $lfs-yellow;
+    th {
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px;
+      color: $lfs-blue;
+      // border: 1px solid #F1F1F1;
+    }
+  }
+  tbody {
+    tr {
+      border-bottom: 1px solid #f1f1f1;
+      color: black;
+      td {
+        padding: 10px;
+        border: 1px solid #f1f1f1;
+      }
+      th {
+        padding-left: 10px;
+        border-bottom: 1px solid #f1f1f1;
+      }
+    }
+  }
+  tfoot {
+    color: $lfs-yellow;
+    font-style: italic;
+    border-bottom: 2px solid $lfs-yellow;
+    tr {
+      td {
+        padding: 10px;
+        border: 1px solid #f1f1f1;
+      }
+    }
+  }
+}
