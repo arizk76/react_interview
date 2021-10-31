@@ -17,7 +17,7 @@ const ChallengeTwo = () => {
     setIsLoaded(true);
 
     if (loadMore > 1) {
-      console.log('Page', loadMore);
+      // console.log('Page', loadMore);
       response = await fetch(
         `https://randomuser.me/api/?seed=dexi-interview?page=${loadMore}&results=10`
       );
@@ -33,7 +33,7 @@ const ChallengeTwo = () => {
         return data;
       }
     }
-    console.log('Page', loadMore);
+    // console.log('Page', loadMore);
     response = await fetch(
       `https://randomuser.me/api/?seed=dexi-interview?page=${loadMore}&results=10`
     );
@@ -65,7 +65,7 @@ const ChallengeTwo = () => {
     // we will use async/await to fetch this data
   }, [loadMore]);
 
-  console.log(userData);
+  // console.log(userData);
 
   if (isLoaded) {
     return (

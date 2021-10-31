@@ -47,46 +47,44 @@ const array5 = [
   You may not install any external libraries.
 */
 function createNewArray(...arrays) {
-  let uniqueHeaderArray = [];
+  // Initialize global variables
+  const uniqueHeaderArray = [];
   let sortedArray = [[]];
-  let headerIndex = 0;
+  let result = [[]];
+  const arraysLength = [];
+  let maxArraysLength = 0;
 
   //  Create header array with unique values without duplicates
+  let jointHeader = [];
 
-  function createHeaderArray(...arrays) {
-    let jointArray = [];
+  arrays.forEach((array) => {
+    jointHeader = [...jointHeader, ...array[0]];
+    return jointHeader;
+  });
 
-    arrays.forEach((array) => {
-      jointArray = [...jointArray, ...array[0]];
-    });
-    uniqueHeaderArray = jointArray.reduce((newArray, item) => {
-      if (newArray.includes(item)) {
-        return newArray;
-      } else {
-        return [...newArray, item];
-      }
-    }, []);
-    return uniqueHeaderArray;
-  }
-  createHeaderArray(...arrays);
-  // console.log(uniqueHeaderArray);
+  jointHeader.forEach((item) => {
+    if (!uniqueHeaderArray.includes(item)) {
+      uniqueHeaderArray.push(item);
+    }
+  });
 
-  // retrieve header index equal to  Col number in final merged array
+  // console.table(uniqueHeaderArray);
+  // Output should be ['name', 'id', 'age', 'weight', 'job', 'height', 'parent', 'hobby', 'status']
 
-  function getHeaderIndex(headerName) {
-    uniqueHeaderArray.forEach((header) => {
-      if (header === headerName) {
-        headerIndex = uniqueHeaderArray.indexOf(header);
-      }
-      return headerIndex;
-    });
-  }
+  arrays.forEach((array) => {
+    arraysLength.push(array.length);
+  });
 
-  // getHeaderIndex(array5[0][1]);
+  maxArraysLength = Math.max(...arraysLength);
 
-  // console.log(headerIndex);
+  // Generate empty array 5 X 9 for final result
+  result = new Array(maxArraysLength)
+    .fill()
+    .map(() => new Array(uniqueHeaderArray.length));
 
-  // sort each array by user id col and fill gaps if missing
+  result[0] = uniqueHeaderArray;
+
+  // Helper function to sort each array by user id and fill empty gaps
 
   function newSortedArr(array) {
     let emptyArray = [[]];
@@ -99,7 +97,7 @@ function createNewArray(...arrays) {
       return a[1] - b[1];
     });
 
-    if (sortedArray.length < 6) {
+    if (sortedArray.length < maxArraysLength) {
       for (let i = 1; i < sortedArray.length; i++) {
         let row = sortedArray[i];
 
@@ -118,8 +116,9 @@ function createNewArray(...arrays) {
     }
     // console.table(sortedArray);
   }
+  // Helper function to GET each col from sorted array
+  // To insert col data separately into final result array
 
-  // Get col from array to merge each col separately into final array
   function getCol(array, col) {
     var column = [];
     for (var i = 0; i < array.length; i++) {
@@ -127,16 +126,29 @@ function createNewArray(...arrays) {
     }
     return column;
   }
+  // Generate final array and assign it to result
+  arrays.forEach((array) => {
+    // First sort each array
+    newSortedArr(array);
 
-  //  var array = [new Array(20), new Array(20), new Array(20)]; //..your 3x20 array
+    for (let i = 0; i <= sortedArray[0].length; i++) {
+      let insertedCol = [];
+      // Get each Col after sort
+      insertedCol = getCol(sortedArray, i);
 
-  newSortedArr(array3);
+      for (let j = 1; j < insertedCol.length; j++) {
+        // inject col data to it's corresponding location if empty only
+        if (!result[j][uniqueHeaderArray.indexOf(insertedCol[0])]) {
+          result[j][uniqueHeaderArray.indexOf(insertedCol[0])] = insertedCol[j];
+        }
+      }
+    }
+  });
 
-  // console.log(sortedArray);
-  // console.log(getCol(sortedArray, 0)); //Get first column
+  return result;
 }
 
-createNewArray(array1, array2, array3, array4, array5);
+console.table(createNewArray(array1, array2, array3, array4, array5));
 
 const ChallengeOne = () => {
   return (
@@ -152,6 +164,10 @@ const ChallengeOne = () => {
       <h2 className='subtitle has-text-grey-lighter'>
         You may not install any additional libraries.
       </h2>
+      <div style={{ color: 'red' }}>
+        <h1>Please check console.log for final result of</h1>
+        <h2>createNewArray(array1, array2, array3, array4, array5)</h2>
+      </div>
     </>
   );
 };

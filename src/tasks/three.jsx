@@ -128,7 +128,7 @@ const ChallengeThree = () => {
   };
   regDateList = userData.map((user) => user.dob.date.substring(0, 4));
 
-  let yearToNumber = regDateList.map((i) => Number(i));
+  // let yearToNumber = regDateList.map((i) => Number(i));
   regDateList.forEach((date) => {
     if (date < 1950) {
       byRegDate.below1950++;
